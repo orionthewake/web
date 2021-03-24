@@ -1,6 +1,5 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import ReactMarkdown from 'react-markdown';
 
 import NoteFeed from '../components/NoteFeed';
 
