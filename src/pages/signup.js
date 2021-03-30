@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useMutation, useApolloClient, gql } from '@apollo/client';
 
 import Button from '../components/Button';
+
+const SIGN_UP_USER = gql`
+  mutation signUp($email: String!, $username: String!, $password: String!) {
+    signUp(email: $email, username: $username, password: $password)
+  }
+`;
 
 const Wrapper = styled.div`
   border: 1px solid #f5f4f0;
@@ -40,13 +47,25 @@ const SignUp = props => {
     document.title = 'Sign Up - Notedly';
   });
 
+  // add the mutation hook
+  const [signUp, { loading, error }] = useMutation(SIGN_UP_USER, {
+    onCompleted: data => {
+      // log the JWT when the mutation is complete
+      console.log(data.signUp);
+    }
+  });
+
   return (
     <Wrapper>
       <h2>Sign Up</h2>
       <Form
         onSubmit={event => {
           event.preventDefault();
-          console.log(values);
+          signUp({
+            variables: {
+              ...values
+            }
+          });
         }}
         >
         <label htmlFor="username">Username:</label>
