@@ -47,11 +47,16 @@ const SignUp = props => {
     document.title = 'Sign Up - Notedly';
   });
 
+
+  const client = useApolloClient();
+
   // add the mutation hook
   const [signUp, { loading, error }] = useMutation(SIGN_UP_USER, {
     onCompleted: data => {
       // store the JWT in local storage
       localStorage.setItem('token', data.signUp);
+      // update the local cache
+      client.writeData({ data: { isLoggedIn: true } });
       // redirect the user to the home page
       props.history.push('/');
     }
