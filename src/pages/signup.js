@@ -50,8 +50,10 @@ const SignUp = props => {
   // add the mutation hook
   const [signUp, { loading, error }] = useMutation(SIGN_UP_USER, {
     onCompleted: data => {
-      // log the JWT when the mutation is complete
-      console.log(data.signUp);
+      // store the JWT in local storage
+      localStorage.setItem('token', data.signUp);
+      // redirect the user to the home page
+      props.history.push('/');
     }
   });
 
