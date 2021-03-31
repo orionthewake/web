@@ -3,25 +3,25 @@ import { useMutation, useApolloClient, gql } from '@apollo/client';
 
 import UserForm from '../components/UserForm';
 
-const SIGNUP_USER = gql`
-  mutation signUp($email: String!, $username: String!, $password: String!) {
-    signUp(email: $email, username: $username, password: $password)
+const SIGNIN_USER = gql`
+  mutation signIn($email: String, $password: String!) {
+    signIn(email: $email, password: $password)
   }
 `;
 
-const SignUp = props => {
+const SignIn = props => {
   useEffect(() => {
     // update the document title
-    document.title = 'Sign Up - Notedly';
+    document.title = 'Sign In - Notedly';
   });
 
   const client = useApolloClient();
 
   // add the mutation hook
-  const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
+  const [signIn, { loading, error }] = useMutation(SIGNIN_USER, {
     onCompleted: data => {
       // store the JWT in local storage
-      localStorage.setItem('token', data.signUp);
+      localStorage.setItem('token', data.signIn);
       // update the local cache
       client.writeData({ data: { isLoggedIn: true } });
       // redirect the user to the home page
@@ -31,13 +31,13 @@ const SignUp = props => {
 
   return (
     <React.Fragment>
-      <UserForm action={signUp} formType='signup' />
+      <UserForm action={signIn} formType='signin' />
       {/* if the data is loading, show a loading message */}
       {loading && <p>Loading...</p>}
       {/* if there is an error, show an error message */}
-      {error && <p>Error creating an account!</p>}
+      {error && <p>Error signing in!</p>}
     </React.Fragment>
   );
 };
 
-export default SignUp;
+export default SignIn;
