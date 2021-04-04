@@ -2,32 +2,32 @@ import React, { useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 
 import NoteForm from '../components/NoteForm';
-
-import { GET_NOTES } from '../gql/query';
 import { NEW_NOTE } from '../gql/mutation';
+import { GET_NOTES } from '../gql/query';
 
 const NewNote = props => {
   useEffect(() => {
-    document.title = 'New Note - Notedly';
+    // update the document title
+    document.title = 'New Note — Notedly';
   });
 
   const [data, { loading, error }] = useMutation(NEW_NOTE, {
     // refetch the GET_NOTES query to update the cache
     refetchQueries: [{ query: GET_NOTES }],
     onCompleted: data => {
-      // when completed, redirect user to note page
+      // when complete, redirect the user to the note page
       props.history.push(`note/${data.newNote.id}`);
     }
   });
 
   return (
     <React.Fragment>
-      {/* as the mutation is loading, show a loading message */}
+      {/* as the mutation is loading, display a loading message*/}
       {loading && <p>Loading...</p>}
-      {/* if there is an error, show an error message */}
+      {/* if there is an error, display an error message*/}
       {error && <p>Error saving the note</p>}
       {/* the form component, passing the mutation data as a prop */}
-      <NoteForm action={data}/>
+      <NoteForm action={data} />
     </React.Fragment>
   );
 };
