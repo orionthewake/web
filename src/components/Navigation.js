@@ -48,17 +48,29 @@ const Navigation = () => {
   return (
     <Nav>
       <NavList>
-        <li>
-          <span aria-hidden="true" role="img">🏠&nbsp;</span>
-          <Link to="/">Home</Link>
+        <li>          
+          <Link to="/">
+            <span aria-hidden="true" role="img">🏠&nbsp;</span>
+            Home
+          </Link>
+        </li>
+        <li>          
+          <Link to="/mynotes">
+            <span aria-hidden="true" role="img">📝&nbsp;</span>
+            My Notes
+          </Link>
+        </li>
+        <li>          
+          <Link to="/favorites">
+            <span aria-hidden="true" role="img">⭐️&nbsp;</span>
+            Favorites
+          </Link>
         </li>
         <li>
-          <span aria-hidden="true" role="img">📝&nbsp;</span>
-          <Link to="/mynotes">My Notes</Link>
-        </li>
-        <li>
-          <span aria-hidden="true" role="img">⭐️&nbsp;</span>
-          <Link to="/favorites">Favorites</Link>
+          <Link to="/new">
+            <span aria-hidden="true" role="img">➕&nbsp;</span>
+            New
+          </Link>
         </li>
       </NavList>
     </Nav>
