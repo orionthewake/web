@@ -9,6 +9,7 @@ import Layout from '../components/Layout';
 // import routes
 import Home from './home';
 import MyNotes from './mynotes';
+import NewNote from './new';
 import Favorites from './favorites';
 import NotePage from './note';
 import SignUp from './signup';
@@ -27,8 +28,9 @@ const Pages = () => {
       <Layout>
         <Route exact path="/" component={Home} />
         <PrivateRoute path="/mynotes" component={MyNotes} />
+        <PrivateRoute path="/new" component={NewNote} />
         <PrivateRoute path="/favorites" component={Favorites} />
-        <Route path="/note/:id" component={NotePage} />
+        <Route path="/note/:id" component={NotePage} />        
         <Route path="/signup" component={SignUp} />
         <Route path="/signin" component={SignIn} />
       </Layout>
